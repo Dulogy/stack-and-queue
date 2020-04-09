@@ -1,0 +1,79 @@
+// stack_sing_dynamic_array
+#include<iostream>
+#include<climits>
+using namespace std;
+class stackArray{
+private :
+int *data ;
+int nextIndex ;
+int capacity ;
+
+public:
+stackArray(){
+    data = new int [3] ;
+    nextIndex = 0 ;
+    capacity = 3;
+}
+// return the number of elements of array
+void  size(){
+    cout << "size of stack :" << nextIndex <<"\n" ;
+}
+// check if the stack is empty or not 
+bool isEmpty(){
+    if(nextIndex == 0)
+    cout << " stack is empty " << "\n" ;
+    else 
+    cout << "stack is not empty " << "\n";
+}
+// push element in the stack 
+void push(int element){
+    if( nextIndex == capacity){
+// now size doubles as stack is full i.e it will never be full
+        int *newdata = new int[2*capacity] ;
+        for(int i = 0; i < nextIndex; i++){
+        newdata[i] = data[i] ;
+        }
+        capacity = capacity * 2 ;
+        delete [] data ;
+        data = newdata ;  
+    }
+    data[nextIndex] = element ;
+    nextIndex ++ ;
+}
+// pop the top element 
+void  pop(){
+    if(nextIndex == 0){
+        cout << "stack is empty" <<"\n";
+    }
+    // or we can use  
+  /*  if(isEmpty){
+        cout << "stack is empty" ;
+    }*/
+    nextIndex-- ;
+    cout << "pop element is " << data[nextIndex] <<"\n" ;
+}
+void  top (){
+    if(nextIndex == 0)
+    cout << "stack is empty :" ;
+    cout <<  data[nextIndex - 1] ;
+
+}
+void print(){
+    cout << "stack elements are ;" ;
+    for(int i = 0; i < nextIndex; i++){
+        cout << data[i] << "\t ";
+    }
+}
+};
+int main(){
+    stackArray s ;
+    s.push(1) ;
+    s.push(2) ;
+    s.push(3) ;
+    s.push(4) ;
+    s.push(5) ;
+    s.pop() ;
+    s.size() ;
+    s.isEmpty() ;
+    s.print() ;
+}
