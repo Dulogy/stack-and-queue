@@ -1,0 +1,82 @@
+// stack_using_template  to make any data type stack (int,double,char)
+
+#include<iostream>
+#include<climits>
+using namespace std;
+template<typename T>
+
+class stackArray{
+private :
+T *data ;      // we use t data type that will decide in main function
+int nextIndex ;
+int capacity ;
+
+public:
+stackArray(){
+    data = new T[3] ;
+    nextIndex = 0 ;
+    capacity = 3;
+}
+// return the number of elements of array
+void  size(){
+    cout << "size of stack :" << nextIndex <<"\n" ;
+}
+// check if the stack is empty or not 
+bool isEmpty(){
+    if(nextIndex == 0)
+    cout << " stack is empty " << "\n" ;
+    else 
+    cout << "stack is not empty " << "\n";
+}
+// push element in the stack 
+void push(int element){
+    if( nextIndex == capacity){
+// now size doubles as stack is full i.e it will never be full
+        T *newdata = new T[2*capacity] ;
+        for(int i = 0; i < nextIndex; i++){
+        newdata[i] = data[i] ;
+        }
+        capacity = capacity * 2 ;
+        delete [] data ;
+        data = newdata ;  
+    }
+    data[nextIndex] = element ;
+    nextIndex ++ ;
+}
+// pop the top element 
+void  pop(){
+    if(nextIndex == 0){
+        cout << "stack is empty" <<"\n";
+    }
+    // or we can use  
+  /*  if(isEmpty){
+        cout << "stack is empty" ;
+    }*/
+    nextIndex-- ;
+    cout << "pop element is " << data[nextIndex] <<"\n" ;
+}
+void  top (){
+    if(nextIndex == 0)
+    cout << "stack is empty :" ;
+    cout <<  data[nextIndex - 1] ;
+
+}
+void print(){
+    cout << "stack elements are ;" ;
+    for(int i = 0; i < nextIndex; i++){
+        cout << data[i] << "\t ";
+    }
+}
+};
+int main(){
+    stackArray<char>s ;  // we can pass any data type here like int,char,double here
+    s.push(100) ;        // covert ascii value  i.e convert 100 into character
+    s.push(101) ;
+    s.push(102) ;
+    s.push(103) ;
+    s.push(104) ;
+    s.pop() ;
+    s.size() ;
+    s.isEmpty() ;
+    s.print() ;
+}
